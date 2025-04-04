@@ -178,16 +178,16 @@ Salam sayang,
       return;
     }
 
-    final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: contact.email,
-      queryParameters: {
-        'subject': settings.language == Language.es ? '¡Feliz Cumpleaños ${contact.name}!' :
-                  settings.language == Language.zh ? '${contact.name}，生日快乐！' :
-                  settings.language == Language.id ? 'Selamat Ulang Tahun ${contact.name}!' :
-                  'Happy Birthday ${contact.name}!',
-        'body': message,
-      },
+    // Manually encode the message to preserve spaces
+    final encodedMessage = Uri.encodeComponent(message).replaceAll('+', '%20');
+
+    final Uri emailLaunchUri = Uri.parse(
+      'mailto:${contact.email}?subject=${Uri.encodeComponent(
+        settings.language == Language.es ? '¡Feliz Cumpleaños ${contact.name}!' :
+        settings.language == Language.zh ? '${contact.name}，生日快乐！' :
+        settings.language == Language.id ? 'Selamat Ulang Tahun ${contact.name}!' :
+        'Happy Birthday ${contact.name}!'
+      )}&body=$encodedMessage'
     );
 
     if (await canLaunchUrl(emailLaunchUri)) {
