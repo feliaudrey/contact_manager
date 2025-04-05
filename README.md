@@ -78,11 +78,5 @@ flutter run
 ## Security Note
 For security reasons, Firebase configuration files (`google-services.json`, `GoogleService-Info.plist`, and `firebase_options.dart`) are not included in this repository. You will need to set up your own Firebase project and add these files locally.
 
-## Screenshots
-[Coming Soon]
 
-## License
 This project is for educational purposes as part of a university assignment.
-
----
-© 2024 Felicia Audrey. All Rights Reserved.
